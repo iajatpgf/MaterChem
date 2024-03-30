@@ -5,8 +5,10 @@ import os
 from langchain.memory import ConversationBufferMemory
 
 
-def get_chat_response(prompt, memory, openai_api_key):
-    model = ChatOpenAI(model="gpt-4", openai_api_key=openai_api_key)
+def get_chat_response(selected_model, prompt, memory, openai_api_key):
+
+
+    model = ChatOpenAI(model=selected_model, openai_api_key=openai_api_key)
     chain = ConversationChain(llm=model, memory=memory)
 
     response = chain.invoke({"input": prompt})

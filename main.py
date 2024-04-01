@@ -10,11 +10,11 @@ with st.sidebar:
     st.subheader('请选择所要使用的模型')
     selected_model = st.sidebar.selectbox('选择一个模型', ['gpt-4-0125-preview', 'gpt-3.5-turbo', ''], key='selected_model')
 
-
 if "memory" not in st.session_state:
     st.session_state["memory"] = ConversationBufferMemory(return_messages=True)
     st.session_state["messages"] = [{"role": "ai",
                                      "content": "你好，我是你的AI助手，有什么可以帮你的吗？"}]
+
 with st.sidebar:# 添加一个按钮，点击后重新设置会话状态
     if st.button('重新开始'):
         st.session_state["memory"] = ConversationBufferMemory(return_messages=True)
@@ -23,6 +23,16 @@ with st.sidebar:# 添加一个按钮，点击后重新设置会话状态
 
 for message in st.session_state["messages"]:
     st.chat_message(message["role"]).write(message["content"])
+    if (len(st.session_state["messages"])) == 1:
+        st.write("""你可以这样问我:
+        
+        ‘你是一个广告公司的创意总监，帮我的产品写一段宣传语，产品是xxx，特点是xxx'
+        
+        '你是一个大学教授，帮我写一篇英文文章的摘要，主题是xxx'
+        
+        '扩写一下这个主题，300字左右，要求立意深刻’
+        
+        ‘帮我润色以下这段内容，内容部分以3个#隔开，###here is your content###'""")
 
 prompt = st.chat_input()
 if prompt:

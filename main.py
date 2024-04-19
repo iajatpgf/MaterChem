@@ -8,8 +8,8 @@ with st.sidebar:
     openai_api_key = st.text_input("请输入OpenAI API Key：", type="password")
     st.markdown("[获取OpenAI API key](https://platform.openai.com/account/api-keys)")
     st.subheader('请选择所要使用的模型')
-    "温馨提示，默认使用gpt-3.5模型，若想得到更好的回复，请选择gpt-4模型，但是更贵，约4分/字"
-    selected_model = st.sidebar.selectbox('选择一个模型', ['gpt-3.5-turbo', 'gpt-4-0125-preview'], key='selected_model')
+    "温馨提示，默认使用gpt-3.5模型，若想得到更好的回复，请选择gpt-4模型，约0.4分/字"
+    selected_model = st.sidebar.selectbox('选择一个模型', ['gpt-3.5-turbo', 'gpt-4-turbo'], key='selected_model')
 
 if "memory" not in st.session_state:
     st.session_state["memory"] = ConversationBufferMemory(return_messages=True)
